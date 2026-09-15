@@ -1,0 +1,10 @@
+/home/linros/ros2_ws/build/my_first_pkg/CMakeFiles/uninstall.dir
+/home/linros/ros2_ws/build/my_first_pkg/CMakeFiles/my_first_pkg_uninstall.dir
+/home/linros/ros2_ws/build/my_first_pkg/CMakeFiles/publisher_node.dir
+/home/linros/ros2_ws/build/my_first_pkg/CMakeFiles/test.dir
+/home/linros/ros2_ws/build/my_first_pkg/CMakeFiles/edit_cache.dir
+/home/linros/ros2_ws/build/my_first_pkg/CMakeFiles/rebuild_cache.dir
+/home/linros/ros2_ws/build/my_first_pkg/CMakeFiles/list_install_components.dir
+/home/linros/ros2_ws/build/my_first_pkg/CMakeFiles/install.dir
+/home/linros/ros2_ws/build/my_first_pkg/CMakeFiles/install/local.dir
+/home/linros/ros2_ws/build/my_first_pkg/CMakeFiles/install/strip.dir
