@@ -10,6 +10,8 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(geometry_msgs REQUIRED)
 
 # 生成服务接口
 rosidl_generate_interfaces(${PROJECT_NAME}
@@ -34,12 +36,18 @@ add_executable(add_client src/add_client.cpp)
 ament_target_dependencies(add_client rclcpp rosidl_typesupport_cpp)
 target_link_libraries(add_client ${PROJECT_NAME}__rosidl_typesupport_cpp)
 
+
+add_executable(tf_broadcaster src/tf_broadcaster.cpp)
+ament_target_dependencies(tf_broadcaster rclcpp tf2_ros geometry_msgs)
+
+
 # 安装
 install(TARGETS
     publisher_node
     subscriber_node
     add_server
     add_client
+    tf_broadcaster
     DESTINATION lib/${PROJECT_NAME}
 )
 
