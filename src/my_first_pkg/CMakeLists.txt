@@ -5,37 +5,42 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-# find dependencies
+# 找到依赖
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 
-if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  # the following line skips the linter which checks for copyrights
-  # comment the line when a copyright and license is added to all source files
-  set(ament_cmake_copyright_FOUND TRUE)
-  # the following line skips cpplint (only works in a git repo)
-  # comment the line when this package is in a git repo and when
-  # a copyright and license is added to all source files
-  set(ament_cmake_cpplint_FOUND TRUE)
-  ament_lint_auto_find_test_dependencies()
-endif()
+# 生成服务接口
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "srv/AddTwoInts.srv"
+)
 
-ament_package()
-
+# 发布者节点
 add_executable(publisher_node src/publisher_node.cpp)
 ament_target_dependencies(publisher_node rclcpp std_msgs)
 
-install(TARGETS
-    publisher_node
-    DESTINATION lib/${PROJECT_NAME}
-)
-
+# 订阅者节点
 add_executable(subscriber_node src/subscriber_node.cpp)
 ament_target_dependencies(subscriber_node rclcpp std_msgs)
 
+# 服务端
+add_executable(add_server src/add_server.cpp)
+ament_target_dependencies(add_server rclcpp rosidl_typesupport_cpp)
+target_link_libraries(add_server ${PROJECT_NAME}__rosidl_typesupport_cpp)
+
+# 客户端
+add_executable(add_client src/add_client.cpp)
+ament_target_dependencies(add_client rclcpp rosidl_typesupport_cpp)
+target_link_libraries(add_client ${PROJECT_NAME}__rosidl_typesupport_cpp)
+
+# 安装
 install(TARGETS
+    publisher_node
     subscriber_node
+    add_server
+    add_client
     DESTINATION lib/${PROJECT_NAME}
 )
+
+ament_package()
