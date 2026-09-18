@@ -41,6 +41,9 @@ add_executable(tf_broadcaster src/tf_broadcaster.cpp)
 ament_target_dependencies(tf_broadcaster rclcpp tf2_ros geometry_msgs)
 
 
+add_executable(dynamic_tf_broadcaster src/dynamic_tf_broadcaster.cpp)
+ament_target_dependencies(dynamic_tf_broadcaster rclcpp tf2_ros geometry_msgs)
+
 # 安装
 install(TARGETS
     publisher_node
@@ -48,6 +51,7 @@ install(TARGETS
     add_server
     add_client
     tf_broadcaster
+    dynamic_tf_broadcaster
     DESTINATION lib/${PROJECT_NAME}
 )
 
