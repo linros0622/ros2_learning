@@ -48,6 +48,10 @@ ament_target_dependencies(dynamic_tf_broadcaster rclcpp tf2_ros geometry_msgs)
 add_executable(cmd_vel_publisher src/cmd_vel_publisher.cpp)
 ament_target_dependencies(cmd_vel_publisher rclcpp geometry_msgs)
 
+
+add_executable(param_publisher src/param_publisher.cpp)
+ament_target_dependencies(param_publisher rclcpp geometry_msgs)
+
 # 安装
 install(TARGETS
     publisher_node
@@ -57,6 +61,7 @@ install(TARGETS
     tf_broadcaster
     dynamic_tf_broadcaster
     cmd_vel_publisher
+    param_publisher
     DESTINATION lib/${PROJECT_NAME}
 )
 
