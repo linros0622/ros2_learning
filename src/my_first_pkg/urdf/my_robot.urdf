@@ -55,4 +55,48 @@
       <robot_base_frame>base_footprint</robot_base_frame>
     </plugin>
   </gazebo>
+<!-- 激光雷达插件 -->
+<gazebo reference="laser">
+  <sensor type="ray" name="laser_sensor">
+    <pose>0 0 0 0 0 0</pose>
+    <visualize>true</visualize>
+    <update_rate>10</update_rate>
+    <ray>
+      <scan>
+        <horizontal>
+          <samples>360</samples>
+          <resolution>1</resolution>
+          <min_angle>-3.14159</min_angle>
+          <max_angle>3.14159</max_angle>
+        </horizontal>
+      </scan>
+      <range>
+        <min>0.1</min>
+        <max>10.0</max>
+      </range>
+    </ray>
+    <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+      <ros>
+        <remapping>~/out:=scan</remapping>
+      </ros>
+      <output_type>sensor_msgs/LaserScan</output_type>
+      <frame_name>laser</frame_name>
+    </plugin>
+  </sensor>
+</gazebo>
+<!-- 测试用障碍物 -->
+<link name="obstacle_box">
+  <visual>
+    <geometry><box size="0.5 0.5 0.5"/></geometry>
+    <material name="red"><color rgba="1 0 0 1"/></material>
+  </visual>
+  <collision>
+    <geometry><box size="0.5 0.5 0.5"/></geometry>
+  </collision>
+</link>
+<joint name="obstacle_joint" type="fixed">
+  <parent link="base_footprint"/>
+  <child link="obstacle_box"/>
+  <origin xyz="2.0 0 0.25"/>
+</joint>
 </robot>
