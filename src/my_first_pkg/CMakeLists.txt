@@ -12,7 +12,7 @@ find_package(std_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(geometry_msgs REQUIRED)
-
+find_package(sensor_msgs REQUIRED)
 # 生成服务接口
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/AddTwoInts.srv"
@@ -52,6 +52,10 @@ ament_target_dependencies(cmd_vel_publisher rclcpp geometry_msgs)
 add_executable(param_publisher src/param_publisher.cpp)
 ament_target_dependencies(param_publisher rclcpp geometry_msgs)
 
+
+add_executable(scan_processor src/scan_processor.cpp)
+ament_target_dependencies(scan_processor rclcpp sensor_msgs)
+
 # 安装
 install(TARGETS
     publisher_node
@@ -62,6 +66,7 @@ install(TARGETS
     dynamic_tf_broadcaster
     cmd_vel_publisher
     param_publisher
+    scan_processor
     DESTINATION lib/${PROJECT_NAME}
 )
 

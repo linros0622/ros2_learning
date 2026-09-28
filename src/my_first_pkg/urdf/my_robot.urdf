@@ -84,19 +84,4 @@
     </plugin>
   </sensor>
 </gazebo>
-<!-- 测试用障碍物 -->
-<link name="obstacle_box">
-  <visual>
-    <geometry><box size="0.5 0.5 0.5"/></geometry>
-    <material name="red"><color rgba="1 0 0 1"/></material>
-  </visual>
-  <collision>
-    <geometry><box size="0.5 0.5 0.5"/></geometry>
-  </collision>
-</link>
-<joint name="obstacle_joint" type="fixed">
-  <parent link="base_footprint"/>
-  <child link="obstacle_box"/>
-  <origin xyz="2.0 0 0.25"/>
-</joint>
 </robot>
