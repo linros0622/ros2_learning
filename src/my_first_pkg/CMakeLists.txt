@@ -56,6 +56,10 @@ ament_target_dependencies(param_publisher rclcpp geometry_msgs)
 add_executable(scan_processor src/scan_processor.cpp)
 ament_target_dependencies(scan_processor rclcpp sensor_msgs)
 
+
+add_executable(auto_avoid src/auto_avoid.cpp)
+ament_target_dependencies(auto_avoid rclcpp sensor_msgs geometry_msgs)
+
 # 安装
 install(TARGETS
     publisher_node
@@ -67,6 +71,7 @@ install(TARGETS
     cmd_vel_publisher
     param_publisher
     scan_processor
+    auto_avoid
     DESTINATION lib/${PROJECT_NAME}
 )
 
